@@ -14,8 +14,8 @@ def merge_sort(array)
   else
     # Snippet for halving array from http://heyrod.com/snippets/split-ruby-array-in-half.html
     half = array.each_slice((array.size / 2.0).round).to_a
-    merge_sort(half[0])
-    merge_sort(half[1])
+    merge_sort(half[0]) #=> 2
+    merge_sort(half[1]) #=> 3
     # merge sorted halves
     merged = []
     until half[0][0].nil? || half[1][0].nil?
@@ -36,13 +36,13 @@ end
 test1 = [4, 8, 6, 2, 1, 7, 5, 3]
 test2 = [9, 4, 8, 6, 2, 1, 7, 5, 3]
 test3 = [1]
-test4 = [[2, 3], [1, 5]]
+test4 = [[2, 3, 7], [1, 5, 9, 13]]
 
 # print array.each_slice((array.size / 2.0).round).to_a
 
 def merge(half)
   merged = []
-  while half.size.flatten! > 1
+  while half.flatten.size > 1
     if half[0][0] < half[1][0]
       merged << half[0].shift
     else
@@ -50,7 +50,8 @@ def merge(half)
     end
   end
   merged << half
-  merged
+  merged.flatten!
 end
 
-print merge_sort(test1)
+print merge_sort(test2)
+print merge(test4)
